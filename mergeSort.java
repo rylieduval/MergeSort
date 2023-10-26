@@ -1,13 +1,31 @@
 import java.util.Arrays;
+import java.util.Random;
 
 public class mergeSort
 {
+    public static Random random = new Random();
     public static void main(String[] args)
     {
-        int[] myArray = { 12, 11, 13, 5, 6, 7 };
- 
+        int[] myArray = new int[10000];
+        Random random = new Random();
+        
+        fillRandomArray(myArray);
+         
+        long start = System.nanoTime();
         mergeSort(myArray, 0, myArray.length-1);
-        System.out.println(Arrays.toString(myArray));
+        long finish = System.nanoTime();
+        long timeElapsed = finish - start;  
+        System.out.println("Sorted Array: " + Arrays.toString(myArray));
+        System.out.println("Sorting a random array took merge sort " + timeElapsed + " ns to complete");
+    }
+    
+    public static int[] fillRandomArray(int[] theArray)
+    {
+        for (int i = 0; i < theArray.length -1; i++)
+        {
+            theArray[i] = random.nextInt(10000);
+        }
+        return theArray;
     }
     
     static void merge(int arr[], int start, int mid, int end)
